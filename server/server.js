@@ -19,15 +19,14 @@ io.on('connection', (socket) => {
         
     }); 
 
-    socket.emit('newMessage', {
-        from: "ashish@example.com",
-        text: "Hey how you doing?",
-        createdAt: 1234
-    });
-
+    
     socket.on('createMessage', (newMessage) => {
         console.log("Create Message", newMessage);
-        
+        io.emit('newMessage', {
+            from: newMessage.from,
+            text: newMessage.text,
+            createdAt: new Date().getTime()
+        });
     });
 
 });
