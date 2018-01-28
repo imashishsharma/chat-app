@@ -21,7 +21,7 @@ socket.on('newMessage', function (message) {
 jQuery('#message-form').on('submit', function (e) {
     e.preventDefault();
     socket.emit('createMessage', {
-        from: "User",
+        from: jQuery('[name=username]').val(),
         text:  jQuery('[name=message]').val()
     }, function (data) {
         console.log("Got response", data);
