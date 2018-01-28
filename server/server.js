@@ -19,14 +19,30 @@ io.on('connection', (socket) => {
         
     }); 
 
+    socket.emit('newMessage', {
+        from: 'Admin',
+        text: 'Welcome to chat room'
+    });
+
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined',
+        createdAt: new Date().getTime()
+    });
+
     
-    socket.on('createMessage', (newMessage) => {
-        console.log("Create Message", newMessage);
+    socket.on('createMessage', (message) => {
+        console.log("Create Message", message);
         io.emit('newMessage', {
-            from: newMessage.from,
-            text: newMessage.text,
+            from: message.from,
+            text: message.text,
             createdAt: new Date().getTime()
         });
+        // socket.broadcast.emit('newMessage', {
+        //     from: message.from,
+        //     text: message.text,
+        //     createdAt: new Date().getTime()
+        // });
     });
 
 });
