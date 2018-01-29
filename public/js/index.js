@@ -24,7 +24,7 @@ jQuery('#message-form').on('submit', function (e) {
         from: jQuery('[name=username]').val(),
         text:  jQuery('[name=message]').val()
     }, function (data) {
-        console.log("Got response", data);
-        
+        console.log("Got response", data);        
     });
+    $('input[name=message]').val('');
 });
